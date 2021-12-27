@@ -34,6 +34,15 @@ DerivedData/
 timeline.xctimeline
 playground.xcworkspace
 
+## Other
+.DS_Store
+profile
+*.moved-aside
+*.xcuserstate
+project.xcworkspace/
+!project.xcworkspace/contents.xcworkspacedata
+!project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
 # Swift Package Manager
 #
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
@@ -58,6 +67,9 @@ playground.xcworkspace
 #
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
+Podfile.lock
+Pods
+
 
 # Carthage
 #

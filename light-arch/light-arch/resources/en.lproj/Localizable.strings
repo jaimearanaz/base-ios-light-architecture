@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  light-arch
+
+  Created by Jaime Aranaz on 27/12/2021.
+  
+*/
+
+"welcome" = "Welcome view controller";
+"next" = "Next";
+"no_internet" = "No Internet! try later please!";
+"error" = "Error! try again please!";

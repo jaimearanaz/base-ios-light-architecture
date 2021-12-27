@@ -1,0 +1,30 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '14.0'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+# XCode warns about fake errors when using CocoaPods views in Interface Builder
+# to solve it, use frameworks instead static libraries
+use_frameworks!
+
+def light_pods
+
+    # timers with blocks
+    pod 'SwiftyTimer'
+    
+end
+
+target 'light-arch' do
+    light_pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '5.0'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+        end
+    end
+end
+
