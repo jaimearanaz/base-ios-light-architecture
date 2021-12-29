@@ -5,6 +5,13 @@
 //  Created by Jaime Aranaz on 27/12/2021.
 //
 
+enum NetworkError: Error {
+    
+    case noInternet
+    case notFound
+    case timeout
+}
+
 protocol NetworkRepositoryProtocol {
     
     @discardableResult

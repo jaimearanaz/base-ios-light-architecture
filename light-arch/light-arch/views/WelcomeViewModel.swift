@@ -7,6 +7,21 @@
 
 import Foundation
 
+enum WelcomeOperation: OperationId {
+    case foo = 1000
+}
+
+enum WelcomeError: Error {
+    case notFound(OperationId)
+}
+
+enum WelcomeTransition {
+    
+    case toSecond
+    case toThird
+    case dismiss
+}
+
 protocol WelcomeViewModelOutput: BaseViewModelOutput {
     
     var foo: Box<Foo> { get set }
@@ -48,16 +63,35 @@ class DefaultWelcomeViewModel: BaseViewModel, WelcomeViewModel {
     
     func fooMethod() {
         
+        let id = WelcomeOperation.foo.rawValue
+        loading.value = (id, true)
+        
         let oneCancellable =
             networkRepository.getSomeData { result in
+
+                self.loading.value = (id, false)
                 
                 switch result {
-                
+
                 case .success(let foo):
+                    self.result.value = .success(id)
                     self.foo.value = foo
                 
-                case .failure(let error):
-                    print(error)
+                case .failure(let networkError):
+                    
+                    var error: Error?
+                    
+                    switch networkError {
+                    case NetworkError.noInternet:
+                        error = BaseViewModelError.noInternet(id)
+                    case NetworkError.notFound:
+                        error = WelcomeError.notFound(id)
+                    default:
+                        error = BaseViewModelError.unknown(id)
+                    }
+                    
+                    self.result.value = .failure(error!)
+                    print(error!)
                 }
             }
         cancellables.append(oneCancellable)

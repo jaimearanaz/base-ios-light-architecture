@@ -25,9 +25,9 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        localization()
-        customization()
         assertViewModel()
+        customization()
+        localization()
         binds()
         baseViewModel?.viewDidLoad()
     }
@@ -46,15 +46,52 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     }
     
     func localization() {
-        
+        // Override in subclass
     }
     
     func customization() {
-         
+        // Override in subclass
+    }
+    
+    func handleSuccess(operationId: OperationId) {
+        // Override in subclass
+    }
+    
+    func handleError(_ error: Error) {
+        // Override in subclass
+    }
+    
+    func startLoading(operationId: OperationId) {
+        // Override in subclass
+    }
+    
+    func stopLoading(operationId: OperationId) {
+        // Override in subclass
     }
     
     func binds() {
 
+        baseViewModel?.loading.bindAndFire({ loading in
+            
+            switch loading.isLoading {
+            case true:
+                self.startLoading(operationId: loading.operationId)
+            case false:
+                self.stopLoading(operationId: loading.operationId)
+                break
+            }
+        })
+        
+        baseViewModel?.result.bind({ result in
+            
+            switch result {
+            
+            case .success(let operationId):
+                self.handleSuccess(operationId: operationId)
+            case .failure(let error):
+                self.handleError(error)
+            }
+        })
     }
     
     private func assertViewModel() {

@@ -45,8 +45,10 @@ class WelcomeViewController: BaseViewController {
     }
     
     override func customization() {
-        
+
         super.customization()
+        titleLabel.font = UIFont.bold(withSize: 17)
+        titleLabel.textColor = UIColor.party
         descriptionLabel.text = ""
         nextButton.isEnabled = false
     }
@@ -56,17 +58,19 @@ class WelcomeViewController: BaseViewController {
         super.binds()
 
         viewModel?.foo.bindAndFire({ foo in
-            
             self.descriptionLabel.text = foo.param1
-            self.handleSuccess()
         })
     }
 
     @IBAction func didSelectNext(_ sender: Any) {
-            performSegue(withIdentifier: secondSegue, sender: self)
+        performSegue(withIdentifier: secondSegue, sender: self)
     }
     
-    private func handleSuccess() {
+    override func handleSuccess(operationId: OperationId) {
         nextButton.isEnabled = true
+    }
+    
+    override func handleError(_ error: Error) {
+        nextButton.isEnabled = false
     }
 }
