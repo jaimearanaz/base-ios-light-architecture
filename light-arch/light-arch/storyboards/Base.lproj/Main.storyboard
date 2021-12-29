@@ -28,6 +28,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="XPD-ko-YP2">
+                                <rect key="frame" x="188.5" y="478.5" width="37" height="37"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q35-pt-nwl">
                                 <rect key="frame" x="191" y="832" width="32" height="30"/>
                                 <state key="normal" title="Next"/>
@@ -45,10 +48,13 @@
                             <constraint firstItem="q35-pt-nwl" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eRd-F7-P7V"/>
                             <constraint firstItem="IwF-eh-jCV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eq0-1Q-But"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IwF-eh-jCV" secondAttribute="trailing" constant="20" id="jtO-bY-2fq"/>
+                            <constraint firstItem="XPD-ko-YP2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="wAb-pK-tWC"/>
                             <constraint firstItem="IwF-eh-jCV" firstAttribute="top" secondItem="o0J-CE-zLR" secondAttribute="bottom" constant="15" id="wAl-hb-3L3"/>
+                            <constraint firstItem="XPD-ko-YP2" firstAttribute="top" secondItem="o0J-CE-zLR" secondAttribute="bottom" constant="15" id="y8f-Ui-hXg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="XPD-ko-YP2" id="TiA-Va-dyy"/>
                         <outlet property="descriptionLabel" destination="IwF-eh-jCV" id="bct-Dm-bXc"/>
                         <outlet property="nextButton" destination="q35-pt-nwl" id="LcV-bw-W1H"/>
                         <outlet property="titleLabel" destination="o0J-CE-zLR" id="e3C-NL-zji"/>

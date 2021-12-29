@@ -85,7 +85,6 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         baseViewModel?.result.bind({ result in
             
             switch result {
-            
             case .success(let operationId):
                 self.handleSuccess(operationId: operationId)
             case .failure(let error):
