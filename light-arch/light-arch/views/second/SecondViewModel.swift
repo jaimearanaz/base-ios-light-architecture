@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum SecondOperation: OperationId {
-    case foo = 1000
-}
-
-enum SecondError: Error {
-    case notFound(OperationId)
-}
-
 protocol SecondViewModelOutput: BaseViewModelOutput {
     
     var foo: Box<Foo> { get set }
@@ -44,32 +36,21 @@ class DefaultSecondViewModel: BaseViewModel, SecondViewModel {
 
     func fooMethod() {
         
-        let id = SecondOperation.foo.rawValue
-        loading.value = (id, true)
+        loading.value = true
         
         let oneCancellable =
             networkRepository.getSomeData { result in
 
-                self.loading.value = (id, false)
+                self.loading.value = false
                 
                 switch result {
 
                 case .success(let foo):
                     self.foo.value = foo
-                    self.result.value = .success(id)
+                    self.result.value = .success(Void())
                 
-                case .failure(let networkError):
-
-                    var error: Error?
-                    
-                    switch networkError {
-                    case NetworkError.noInternet:
-                        error = BaseViewModelError.noInternet(id)
-                    default:
-                        error = BaseViewModelError.unknown(id)
-                    }
-                    
-                    self.result.value = .failure(error!)
+                case .failure(let error):
+                    self.result.value = .failure(error)
                 }
             }
         

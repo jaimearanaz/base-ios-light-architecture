@@ -7,23 +7,10 @@
 
 import Foundation
 
-typealias OperationId = Int
-typealias Loading = (operationId: OperationId, isLoading: Bool)
-
-enum BaseViewModelOperation: OperationId {
-    case anyone = 0
-}
-
-enum BaseViewModelError: Error {
-    
-    case unknown(OperationId)
-    case noInternet(OperationId)
-}
-
 protocol BaseViewModelOutput {
 
-    var loading: Box<Loading> { get set }
-    var result: Box<Result<OperationId, Error>> { get set }
+    var loading: Box<Bool> { get set }
+    var result: Box<Result<Void, Error>> { get set }
 }
 
 protocol BaseViewModelInput {
@@ -43,8 +30,8 @@ class BaseViewModel: BaseViewModelProtocol {
 
     var analytics: AnalyticsProtocol?
     var cancellables = [Cancellable]()
-    var loading: Box<Loading> = Box((operationId: 0, isLoading: false))
-    var result: Box<Result<OperationId, Error>> = Box(.success(0))
+    var loading = Box(false)
+    var result: Box<Result<Void, Error>> = Box(.success(Void()))
     
     func viewDidLoad() {
         // Override in subclass

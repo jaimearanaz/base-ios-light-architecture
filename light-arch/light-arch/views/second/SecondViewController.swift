@@ -12,9 +12,7 @@ class SecondViewController: BaseViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var viewModel: SecondViewModel? {
-        didSet { baseViewModel = viewModel }
-    }
+    var viewModel: SecondViewModel? { didSet { baseViewModel = viewModel } }
 
     override func viewDidLoad() {
         

@@ -53,7 +53,7 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         // Override in subclass
     }
     
-    func handleSuccess(operationId: OperationId) {
+    func handleSuccess() {
         // Override in subclass
     }
     
@@ -61,23 +61,23 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         // Override in subclass
     }
     
-    func startLoading(operationId: OperationId) {
+    func startLoading() {
         // Override in subclass
     }
     
-    func stopLoading(operationId: OperationId) {
+    func stopLoading() {
         // Override in subclass
     }
     
     func binds() {
 
-        baseViewModel?.loading.bindAndFire({ loading in
+        baseViewModel?.loading.bindAndFire({ isLoading in
             
-            switch loading.isLoading {
+            switch isLoading {
             case true:
-                self.startLoading(operationId: loading.operationId)
+                self.startLoading()
             case false:
-                self.stopLoading(operationId: loading.operationId)
+                self.stopLoading()
                 break
             }
         })
@@ -85,8 +85,8 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         baseViewModel?.result.bind({ result in
             
             switch result {
-            case .success(let operationId):
-                self.handleSuccess(operationId: operationId)
+            case .success():
+                self.handleSuccess()
             case .failure(let error):
                 self.handleError(error)
             }

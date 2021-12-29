@@ -15,10 +15,8 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var nextButton: UIButton!
     
-    var viewModel: WelcomeViewModel? {
-        didSet { baseViewModel = viewModel }
-    }
-    var secondSegue = "secondSegue"
+    var viewModel: WelcomeViewModel? { didSet { baseViewModel = viewModel } }
+    var toSecondSegue = "toSecondSegue"
             
     override func viewDidLoad() {
         
@@ -29,7 +27,7 @@ class WelcomeViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     
         switch (segue.identifier) {
-        case secondSegue:
+        case toSecondSegue:
             injector?.injectSecond(withSegue: segue)
         default:
             break
@@ -61,7 +59,7 @@ class WelcomeViewController: BaseViewController {
         })
     }
     
-    override func handleSuccess(operationId: OperationId) {
+    override func handleSuccess() {
         nextButton.isEnabled = true
     }
     
@@ -69,27 +67,26 @@ class WelcomeViewController: BaseViewController {
         
         nextButton.isEnabled = false
         switch error {
-        case BaseViewModelError.noInternet( _):
+        case AppError.noInternet:
             self.descriptionLabel.text = "no_internet".localized
         default:
             self.descriptionLabel.text = "error".localized
         }
     }
     
-    override func startLoading(operationId: OperationId) {
+    override func startLoading() {
         
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
     
-    override func stopLoading(operationId: OperationId) {
+    override func stopLoading() {
         
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
     }
     
-    
     @IBAction func didSelectNext(_ sender: Any) {
-        performSegue(withIdentifier: secondSegue, sender: self)
+        performSegue(withIdentifier: toSecondSegue, sender: self)
     }
 }

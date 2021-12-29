@@ -9,14 +9,8 @@ import Foundation
 
 enum AppError: Error {
     
-    /*
-    case NoConnectionError
-    case TimeoutError
-    case HttpNotFoundError
-    case DatabaseError
-    case PasswordError
-    case UserAlreadyExistsError
-    case UserIsNot18Error
-    case UserHasNoFoundsError
- */
+    case unknown
+    case noInternet
+    case notFound
+    case timeout
 }
