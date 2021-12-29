@@ -71,6 +71,13 @@ class WelcomeViewController: BaseViewController {
     }
     
     override func handleError(_ error: Error) {
+        
         nextButton.isEnabled = false
+        switch error {
+        case BaseViewModelError.noInternet( _):
+            self.descriptionLabel.text = "no_internet".localized
+        default:
+            self.descriptionLabel.text = "error".localized
+        }
     }
 }

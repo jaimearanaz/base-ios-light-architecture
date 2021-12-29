@@ -24,5 +24,14 @@ class DependencyInjector: DependencyInjectorProtocol {
     
     func injectSecond(withSegue segue: UIStoryboardSegue) {
         
+        let analytics = DefaultAnalytics()
+        let networkRepository = NetworkRepository()
+        let viewModel = DefaultSecondViewModel(networkRepository: networkRepository, analytics: analytics)
+        viewModel.analytics = DefaultAnalytics()
+
+        let viewController = segue.destination as! SecondViewController
+        viewController.viewModel = viewModel
+        viewController.analytics = DefaultAnalytics()
+        viewController.injector = self
     }
 }

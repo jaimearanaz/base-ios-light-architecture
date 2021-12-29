@@ -31,6 +31,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q35-pt-nwl">
                                 <rect key="frame" x="191" y="832" width="32" height="30"/>
                                 <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="didSelectNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="493-OM-tkl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,11 +52,52 @@
                         <outlet property="descriptionLabel" destination="IwF-eh-jCV" id="bct-Dm-bXc"/>
                         <outlet property="nextButton" destination="q35-pt-nwl" id="LcV-bw-W1H"/>
                         <outlet property="titleLabel" destination="o0J-CE-zLR" id="e3C-NL-zji"/>
+                        <segue destination="0WO-DF-5h9" kind="show" identifier="secondSegue" id="Nwo-SD-0Qg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="103.79464285714285"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="fAV-UQ-zpH">
+            <objects>
+                <viewController storyboardIdentifier="SecondViewController" id="0WO-DF-5h9" customClass="SecondViewController" customModule="light_arch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IU4-ZP-57o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second view controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cso-Ph-7mu">
+                                <rect key="frame" x="120" y="393.5" width="174" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum dolor sic amet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJa-fy-7Da">
+                                <rect key="frame" x="20" y="429.5" width="374" height="20"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="e2J-Na-Mbd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cso-Ph-7mu" firstAttribute="centerX" secondItem="e2J-Na-Mbd" secondAttribute="centerX" id="4zP-eV-OTt"/>
+                            <constraint firstItem="e2J-Na-Mbd" firstAttribute="trailing" secondItem="AJa-fy-7Da" secondAttribute="trailing" constant="20" id="DRV-us-tkw"/>
+                            <constraint firstItem="AJa-fy-7Da" firstAttribute="top" secondItem="cso-Ph-7mu" secondAttribute="bottom" constant="15" id="OTS-f5-S9e"/>
+                            <constraint firstItem="AJa-fy-7Da" firstAttribute="leading" secondItem="e2J-Na-Mbd" secondAttribute="leading" constant="20" id="RmN-go-hMx"/>
+                            <constraint firstItem="cso-Ph-7mu" firstAttribute="centerY" secondItem="e2J-Na-Mbd" secondAttribute="centerY" id="SzS-zD-Ar4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bfb-HN-q2Q"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="AJa-fy-7Da" id="T1O-Ec-BtC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BAg-ZH-CjR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1265" y="104"/>
         </scene>
     </scenes>
     <resources>

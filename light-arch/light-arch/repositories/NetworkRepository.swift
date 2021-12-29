@@ -24,9 +24,9 @@ class NetworkRepository: NetworkRepositoryProtocol, Cancellable {
         
         Timer.after(2) {
             let data = Foo(param1: "This is coming from data layer!", param2: 0, param3: true)
-            completion(.success(data))
+            //completion(.success(data))
             //completion(.failure(NetworkError.noInternet))
-            //completion(.failure(NetworkError.notFound))
+            completion(.failure(NetworkError.notFound))
             self.requests.removeFirst(object: self)
         }
         

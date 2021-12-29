@@ -1,36 +1,36 @@
 //
-//  WelcomeViewModel.swift
-//  light-arch
+//  SecondViewModel.swift
+//  clean-architecture
 //
-//  Created by Jaime Aranaz on 27/12/2021.
+//  Created by Jaime Aranaz on 22/12/2021.
 //
 
 import Foundation
 
-enum WelcomeOperation: OperationId {
+enum SecondOperation: OperationId {
     case foo = 1000
 }
 
-enum WelcomeError: Error {
+enum SecondError: Error {
     case notFound(OperationId)
 }
 
-protocol WelcomeViewModelOutput: BaseViewModelOutput {
+protocol SecondViewModelOutput: BaseViewModelOutput {
     
     var foo: Box<Foo> { get set }
 }
 
-protocol WelcomeViewModelInput: BaseViewModelInput {
+protocol SecondViewModelInput: BaseViewModelInput {
     
     func fooMethod()
 }
 
-protocol WelcomeViewModel: BaseViewModel, WelcomeViewModelOutput, WelcomeViewModelInput {
+protocol SecondViewModel: BaseViewModel, SecondViewModelOutput, SecondViewModelInput {
     
     var networkRepository: NetworkRepositoryProtocol { get set }
 }
 
-class DefaultWelcomeViewModel: BaseViewModel, WelcomeViewModel {
+class DefaultSecondViewModel: BaseViewModel, SecondViewModel {
     
     var networkRepository: NetworkRepositoryProtocol
     var foo = Box(Foo(param1: "", param2: 0, param3: false))
@@ -41,22 +41,10 @@ class DefaultWelcomeViewModel: BaseViewModel, WelcomeViewModel {
         super.init()
         self.analytics = analytics
     }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        analytics?.logBackgroundWithLastScreen()
-    }
-    
-    override func viewDidAppear() {
-        
-        super.viewDidAppear()
-        analytics?.logBackgroundWithLastScreen()
-    }
-    
+
     func fooMethod() {
         
-        let id = WelcomeOperation.foo.rawValue
+        let id = SecondOperation.foo.rawValue
         loading.value = (id, true)
         
         let oneCancellable =
@@ -71,22 +59,20 @@ class DefaultWelcomeViewModel: BaseViewModel, WelcomeViewModel {
                     self.result.value = .success(id)
                 
                 case .failure(let networkError):
-                    
+
                     var error: Error?
                     
                     switch networkError {
                     case NetworkError.noInternet:
                         error = BaseViewModelError.noInternet(id)
-                    case NetworkError.notFound:
-                        error = WelcomeError.notFound(id)
                     default:
                         error = BaseViewModelError.unknown(id)
                     }
                     
                     self.result.value = .failure(error!)
-                    print(error!)
                 }
             }
+        
         cancellables.append(oneCancellable)
     }
 }

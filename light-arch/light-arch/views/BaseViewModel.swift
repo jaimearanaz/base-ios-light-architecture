@@ -46,9 +46,13 @@ class BaseViewModel: BaseViewModelProtocol {
     var loading: Box<Loading> = Box((operationId: 0, isLoading: false))
     var result: Box<Result<OperationId, Error>> = Box(.success(0))
     
-    func viewDidLoad() { }
+    func viewDidLoad() {
+        // Override in subclass
+    }
     
-    func viewDidAppear() { }
+    func viewDidAppear() {
+        // Override in subclass
+    }
     
     func viewWillDisappear() {
         cancellables.forEach { $0.cancel() }
